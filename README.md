@@ -19,7 +19,21 @@
 - Implement a ResNet-34 from scratch based on its original [paper](https://arxiv.org/abs/1512.03385).
 - ![ResNet networks](figs/ResNet_paper_networks.png)
 - For detailed description please refer to Figure 3 in the paper.
-- Network structure: 
+
+## Data
+- Data available upon request.
+
+## Training design
+- Data augmentation: horizontally flip the given image randomly with a probability of 0.5 (transforms.RandomHorizontalFlip()) - increase the AUC for 3% after added.
+- Objective function for classification: Cross entropy loss
+- Optimizer: SGD(momentum=0.9, weight decay=5e-5, initial learning rate=0.15)
+- Learning rate scheduler on validation loss: ReduceLROnPlateau with mode="min", patience=2, factor=0.85.
+- Batch size=128.
+
+## How to run?
+- Run the file `script.ipynb`.
+
+## Detailed network structure: 
 ```
 Resnet34(
   (conv1): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
@@ -133,15 +147,6 @@ Resnet34(
 )
 ```
 
-## Training design
-- Data augmentation: horizontally flip the given image randomly with a probability of 0.5 (transforms.RandomHorizontalFlip()) - increase the AUC for 3% after added.
-- Objective function for classification: Cross entropy loss
-- Optimizer: SGD(momentum=0.9, weight decay=5e-5, initial learning rate=0.15)
-- Learning rate scheduler on validation loss: ReduceLROnPlateau with mode="min", patience=2, factor=0.85.
-- Batch size=128.
-
-## How to run?
-- Run the file `script.py`.
 
 ## Reference
 He, K., Zhang, X., Ren, S., & Sun, J. (2016). Deep residual learning for image recognition. In Proceedings of the IEEE conference on computer vision and pattern recognition (pp. 770-778).
